@@ -76,3 +76,5 @@ PWD is not in a git repo (or the git command is not found)."
 
 (defun eshell/nav (name)
   (message (eshell/pwd)))
+
+(provide 'eshell-custom)

@@ -353,5 +353,5 @@ prompt to name>."
 
 (desktop-save-mode 1)
 
-(load-library "morepython")
-(load-library "eshell")
+(load-library "python-custom")
+(load-library "eshell-custom")
