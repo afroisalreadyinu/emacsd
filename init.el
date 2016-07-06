@@ -67,7 +67,6 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-
 ;; smex
 (require 'smex)
 (smex-initialize)
@@ -162,7 +161,6 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 (autoload 'javascript-mode "javascript" nil t)
-
 
 ; interpret and use ansi color codes in shell output windows
 (ansi-color-for-comint-mode-on)
