@@ -21,7 +21,34 @@
            "~/projects/gimme-cat"
            "/usr/local/share/emacs/site-lisp")
 
-(setq ring-bell-function 'ignore)
+(setq ring-bell-function 'ignore
+      confirm-kill-emacs 'y-or-n-p
+      inhibit-startup-message t
+      default-indicate-empty-lines t
+      redisplay-dont-pause t
+      scroll-margin 1
+      scroll-step 1
+      scroll-conservatively 10000
+      scroll-preserve-screen-position 1
+      ;;why?
+      default-directory "/Users/ulas"
+      make-backup-files nil
+      auto-save-default nil
+      transient-mark-mode nil)
+
+(set-language-environment "utf-8")
+(define-coding-system-alias 'UTF-8 'utf-8)
+
+;; org-mode
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a t") 'org-todo-list)
+(setq org-cycle-separator-lines 1
+      org-replace-disputed-keys t
+      org-log-done 'time)
+
+(server-start)
+(desktop-save-mode 1)
+
 
 (when (eq system-type 'darwin)
   (setenv "PATH" (concat "/opt/local/bin:/opt/local/sbin:/usr/local/git/bin:/usr/local/bin:" (getenv "PATH")))
@@ -140,18 +167,10 @@
 (if (functionp 'x-cut-buffer-or-selection-value)
   (setq interprogram-paste-function 'x-cut-buffer-or-selection-value))
 
-(setq make-backup-files nil)
-(setq auto-save-default nil)
-(setq transient-mark-mode nil)
-
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
-
-(setq confirm-kill-emacs 'y-or-n-p)
-(setq inhibit-startup-message t)
-(setq default-indicate-empty-lines t)
 
 (require 'framemove)
 (windmove-default-keybindings)
@@ -195,28 +214,8 @@
 (setq magit-default-tracking-name-function (lambda (remote branch) branch))
 (setq magit-push-always-verify nil)
 
-(setq redisplay-dont-pause t
-      scroll-margin 1
-      scroll-step 1
-      scroll-conservatively 10000
-      scroll-preserve-screen-position 1)
-
-;;why?
-(setq default-directory "/Users/ulas")
-
-(set-language-environment "utf-8")
-
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-
-;; org-mode
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c a t") 'org-todo-list)
-(setq org-cycle-separator-lines 1)
-(setq org-replace-disputed-keys t)
-(setq org-log-done 'time)
-
-(server-start)
 
 (require 'evil)
 (setq evil-want-fine-undo t)
@@ -230,11 +229,6 @@
 (evil-set-initial-state 'magit-popup-mode 'emacs)
 (evil-set-initial-state 'magit-refs 'emacs)
 
-(define-coding-system-alias 'UTF-8 'utf-8)
-
-(desktop-save-mode 1)
-
-
-(load-library "eshell-custom")
+(require 'eshell-custom)
 
 (require 'turkish)
