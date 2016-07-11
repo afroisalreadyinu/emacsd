@@ -42,12 +42,11 @@
 (global-set-key (kbd "s-w")  'kill-buffer)
 (global-set-key (kbd "s-0")  'delete-window)
 
-(setq ibuffer-expert t)
-(setq ibuffer-show-empty-filter-groups nil)
-(setq ibuffer-saved-filter-groups
-      '(("default"
-         ("BLOG" (filename . "/Documents/documents/notes/for_blog/"))
-         ("PROJECTS" (filename . "/projects/")))))
+(setq ibuffer-expert t
+      ibuffer-show-empty-filter-groups nil
+      ibuffer-saved-filter-groups '(("default"
+                                     ("BLOG" (filename . "/Documents/documents/notes/for_blog/"))
+                                     ("PROJECTS" (filename . "/projects/")))))
 
 (add-hook 'ibuffer-mode-hook
           (lambda ()
