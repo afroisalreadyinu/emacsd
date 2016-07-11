@@ -8,6 +8,9 @@
   (insert "# TODO-ulas: ")
   (indent-for-tab-command))
 
+(global-set-key "\C-c2" 'insert-pdb)
+(global-set-key "\C-c3" 'insert-todo)
+
 (defun copy-file-name-to-clipboard ()
   "Copy the current buffer file name to the clipboard."
   (interactive)
