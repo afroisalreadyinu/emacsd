@@ -79,9 +79,9 @@
           (lambda ()
             (ibuffer-switch-to-saved-filter-groups "default")))
 (add-hook 'html-mode-hook
-          (lambda () (add-hook 'before-save-hook (lambda () (untabify (point-min) (point-max))))))
+          (lambda () (add-hook 'before-save-hook (lambda () (untabify (point-min) (point-max))) nil t)))
 (add-hook 'javascript-mode-hook
-          (lambda () (add-hook 'before-save-hook (lambda () (untabify (point-min) (point-max))))))
+          (lambda () (add-hook 'before-save-hook (lambda () (untabify (point-min) (point-max))) nil t)))
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
