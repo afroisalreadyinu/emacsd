@@ -14,8 +14,6 @@
   str)
 
 (add-paths "~/.emacs.d/elisp"
-           "~/Documents/documents/stuff/elisp"
-           "~/Documents/documents/stuff/elisp/evil"
            "~/projects/abl-mode"
            "~/projects/find-here-mode"
            "~/projects/gimme-cat"
@@ -93,7 +91,13 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
+(defun package-require (pkg)
+  "Install a package only if it's not already installed."
+  (when (not (package-installed-p pkg))
+    (package-install pkg)))
+
 ;; smex
+(package-require 'smex)
 (require 'smex)
 (smex-initialize)
 (global-set-key "\C-x\C-m" 'smex)
@@ -116,23 +120,25 @@
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis) ;;or 'expression
 
-(require 'highlight-current-line)
-(highlight-current-line-on t)
+(global-hl-line-mode 1)
 ;; To customize the background color
 ;;(set-face-background 'hl-line "khaki")  ;; Emacs 22 Only
 ;;(set-cursor-color "red")
+(package-require 'color-theme)
 (require 'color-theme)
+(package-require 'zenburn)
 (require 'zenburn)
 (color-theme-zenburn)
 
+(package-require 'ido)
 (require 'ido)
 (ido-mode 'both)
+
 (require 'uniquify)
 (setq
   uniquify-buffer-name-style 'post-forward
   uniquify-separator ":")
 (setq ido-enable-flex-matching t) ;; enable fuzzy matching
-
 
 
 (custom-set-variables
@@ -167,11 +173,13 @@
 (if (functionp 'x-cut-buffer-or-selection-value)
   (setq interprogram-paste-function 'x-cut-buffer-or-selection-value))
 
+(package-require 'recentf)
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
+(package-require 'framemove)
 (require 'framemove)
 (windmove-default-keybindings)
 (setq framemove-hook-into-windmove t)
@@ -202,21 +210,21 @@
 (add-hook 'python-mode-hook 'abl-mode-hook)
 (require 'find-here-mode)
 
-(require 'camelCase)
-(add-hook 'find-file-hook (lambda () (camelCase-mode 1)))
-
 (require 'gimme-cat)
 (global-set-key "\C-c\k" 'gimme-cat)
 
+(package-require 'magit)
 (require 'magit)
 (global-set-key "\C-c\g" 'magit-status)
 (global-set-key "\C-c\w" 'magit-branch-manager)
 (setq magit-default-tracking-name-function (lambda (remote branch) branch))
 (setq magit-push-always-verify nil)
 
+(package-require 'yaml-mode)
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
+(package-require 'evil)
 (require 'evil)
 (setq evil-want-fine-undo t)
 (define-key evil-normal-state-map (kbd "TAB") 'indent-for-tab-command)
@@ -231,4 +239,5 @@
 
 (require 'eshell-custom)
 
+(package-require 'turkish)
 (require 'turkish)
