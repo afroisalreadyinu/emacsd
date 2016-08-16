@@ -241,3 +241,6 @@
 
 (package-require 'turkish)
 (require 'turkish)
+
+
+(package-require 'go-mode)
