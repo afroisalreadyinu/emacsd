@@ -17,6 +17,7 @@
            "~/projects/abl-mode"
            "~/projects/find-here-mode"
            "~/projects/gimme-cat"
+           "~/projects/pynavigator"
            "/usr/local/share/emacs/site-lisp")
 
 (setq ring-bell-function 'ignore
@@ -207,7 +208,14 @@
 
 (require 'utils)
 (require 'abl-mode)
+
+;;;###autoload
 (add-hook 'python-mode-hook 'abl-mode-hook)
+
+(require 'pynavigator)
+;;;###autoload
+(add-hook 'python-mode-hook 'pynavigator-mode)
+
 (require 'find-here-mode)
 
 (require 'gimme-cat)
