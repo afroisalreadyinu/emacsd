@@ -67,6 +67,7 @@
 (global-set-key (kbd "M-SPC")  '(lambda () (interactive) (just-one-space -1)))
 (global-set-key (kbd "s-w")  'kill-buffer)
 (global-set-key (kbd "s-0")  'delete-window)
+(global-unset-key (kbd "s-k"))
 
 (setq ibuffer-expert t
       ibuffer-show-empty-filter-groups nil
