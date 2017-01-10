@@ -12,8 +12,8 @@ prompt to name>."
 (require 'virtualenvwrapper)
 (venv-initialize-interactive-shells) ;; if you want interactive shell support
 (venv-initialize-eshell) ;; if you want eshell support
-(setq venv-location "/Users/ulas/.virtualenvs")
-(setq eshell-aliases-file "/Users/ulas/Documents/documents/stuff/elisp/alias")
+(setq venv-location "/home/ulas/.virtualenvs")
+(setq eshell-aliases-file "/home/ulas/Documents/documents/stuff/elisp/alias")
 
 (defun curr-dir-git-branch-string (pwd)
   "Returns current git branch as a string, or the empty string if
