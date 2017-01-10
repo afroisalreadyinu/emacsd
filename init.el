@@ -15,7 +15,6 @@
 
 (add-paths "~/.emacs.d/elisp"
            "~/projects/abl-mode"
-           "~/projects/find-here-mode"
            "~/projects/gimme-cat"
            "~/projects/pynavigator"
            "/usr/local/share/emacs/site-lisp")
@@ -29,8 +28,6 @@
       scroll-step 1
       scroll-conservatively 10000
       scroll-preserve-screen-position 1
-      ;;why?
-      default-directory "/Users/ulas"
       make-backup-files nil
       auto-save-default nil
       transient-mark-mode nil)
@@ -66,6 +63,7 @@
 (global-set-key (kbd "s-m")  '(lambda () (interactive) (message "Have a nice day!")))
 (global-set-key (kbd "M-SPC")  '(lambda () (interactive) (just-one-space -1)))
 (global-set-key (kbd "s-w")  'kill-buffer)
+(global-set-key (kbd "s-s")  'save-buffer)
 (global-set-key (kbd "s-0")  'delete-window)
 (global-unset-key (kbd "s-k"))
 
@@ -217,8 +215,6 @@
 ;;;###autoload
 (add-hook 'python-mode-hook 'pynavigator-mode)
 
-(require 'find-here-mode)
-
 (require 'gimme-cat)
 (global-set-key "\C-c\k" 'gimme-cat)
 
@@ -255,3 +251,4 @@
 (package-require 'go-mode)
 (package-require 'hcl-mode)
 (add-to-list 'auto-mode-alist '("\\.tf\\'" . hcl-mode))
+(package-require 'virtualenvwrapper)
