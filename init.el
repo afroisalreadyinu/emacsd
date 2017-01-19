@@ -252,3 +252,4 @@
 (package-require 'hcl-mode)
 (add-to-list 'auto-mode-alist '("\\.tf\\'" . hcl-mode))
 (package-require 'virtualenvwrapper)
+(package-require 'dockerfile-mode)
