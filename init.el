@@ -253,3 +253,6 @@
 (add-to-list 'auto-mode-alist '("\\.tf\\'" . hcl-mode))
 (package-require 'virtualenvwrapper)
 (package-require 'dockerfile-mode)
+
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+(setq inferior-lisp-program "sbcl")
