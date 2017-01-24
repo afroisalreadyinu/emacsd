@@ -53,9 +53,9 @@
 (defun git-cmd (cmd)
   (shell-command-to-string (concat "git " cmd)))
 
-(defun browse-github ()
-  "Open the github page of a repo."
-  (interactive)
+(defun browse-github (arg)
+  "Open the github page of a repo. With modifier, go to file"
+  (interactive "P")
   (let* ((origin (git-cmd "config --get remote.origin.url"))
          (branch (trim (git-cmd "rev-parse --abbrev-ref HEAD")))
          (repo-url (replace-regexp-in-string
@@ -64,8 +64,11 @@
                      "git@github\.com:" "http://github.com/" origin)))
          (branch-url (if (string-equal branch "master")
                          repo-url
-                       (concat repo-url "/tree/" branch))))
-    (browse-url branch-url)))
+                       (concat repo-url "/tree/" branch)))
+	 (git-base (expand-file-name (locate-dominating-file (buffer-file-name) ".git")))
+	 (file-url (concat repo-url "/blob/" branch "/"
+			   (file-relative-name (buffer-file-name) git-base))))
+    (browse-url (if arg file-url branch-url))))
 (global-set-key (kbd "C-c h") 'browse-github)
 
 
