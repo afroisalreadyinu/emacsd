@@ -14,10 +14,8 @@
   str)
 
 (add-paths "~/.emacs.d/elisp"
-           "~/projects/abl-mode"
-           "~/projects/gimme-cat"
-           "~/projects/pynavigator"
-           "/usr/local/share/emacs/site-lisp")
+           "~/projects/abl-mode")
+
 
 (setq ring-bell-function 'ignore
       confirm-kill-emacs 'y-or-n-p
@@ -211,13 +209,6 @@
 ;;;###autoload
 (add-hook 'python-mode-hook 'abl-mode-hook)
 
-(require 'pynavigator)
-;;;###autoload
-(add-hook 'python-mode-hook 'pynavigator-mode)
-
-(require 'gimme-cat)
-(global-set-key "\C-c\k" 'gimme-cat)
-
 (package-require 'magit)
 (require 'magit)
 (global-set-key "\C-c\g" 'magit-status)
@@ -253,6 +244,3 @@
 (add-to-list 'auto-mode-alist '("\\.tf\\'" . hcl-mode))
 (package-require 'virtualenvwrapper)
 (package-require 'dockerfile-mode)
-
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "sbcl")
