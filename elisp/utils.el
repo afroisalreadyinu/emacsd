@@ -53,22 +53,41 @@
 (defun git-cmd (cmd)
   (shell-command-to-string (concat "git " cmd)))
 
+(defun github-urls (repo-url branch filepath)
+  (let* ((repo-url (replace-regexp-in-string
+		    "\.git\n" ""
+		    (replace-regexp-in-string
+		     "git@github\.com:" "https://github.com/" origin)))
+         (branch-url (if (string-equal branch "master")
+                         repo-url
+                       (concat repo-url "/tree/" branch)))
+	 (file-url (concat repo-url "/blob/" branch "/" filepath)))
+    (cons branch-url file-url)))
+
+(defun bitbucket-urls (repo-url branch filepath)
+  (let* ((repo-url (replace-regexp-in-string
+		    "\.git\n" ""
+		    (replace-regexp-in-string
+		     "git@bitbucket\.org:" "https://bitbucket.org/" origin)))
+         (branch-url (if (string-equal branch "master")
+                         repo-url
+                       (concat repo-url "/branch/" branch)))
+	 (file-url (concat repo-url "/blob/" branch "/" filepath)))
+    (cons branch-url branch-url)))
+
+
 (defun browse-github (arg)
   "Open the github page of a repo. With modifier, go to file"
   (interactive "P")
   (let* ((origin (git-cmd "config --get remote.origin.url"))
          (branch (trim (git-cmd "rev-parse --abbrev-ref HEAD")))
-         (repo-url (replace-regexp-in-string
-                    "\.git\n" ""
-                    (replace-regexp-in-string
-                     "git@github\.com:" "http://github.com/" origin)))
-         (branch-url (if (string-equal branch "master")
-                         repo-url
-                       (concat repo-url "/tree/" branch)))
 	 (git-base (expand-file-name (locate-dominating-file (buffer-file-name) ".git")))
-	 (file-url (concat repo-url "/blob/" branch "/"
-			   (file-relative-name (buffer-file-name) git-base))))
-    (browse-url (if arg file-url branch-url))))
+	 (filepath (file-relative-name (buffer-file-name) git-base))
+	 (urls (if (s-contains? "github.com" origin)
+		   (github-urls origin branch filepath)
+		 (bitbucket-urls origin branch filepath))))
+    (browse-url (if arg (cdr urls) (car urls)))))
+
 (global-set-key (kbd "C-c h") 'browse-github)
 
 

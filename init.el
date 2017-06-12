@@ -244,3 +244,7 @@
 (add-to-list 'auto-mode-alist '("\\.tf\\'" . hcl-mode))
 (package-require 'virtualenvwrapper)
 (package-require 'dockerfile-mode)
+
+(setq explicit-shell-file-name "bash")
+
+(package-require 's)
