@@ -248,3 +248,4 @@
 (setq explicit-shell-file-name "bash")
 
 (package-require 's)
+(package-require 'inf-mongo)

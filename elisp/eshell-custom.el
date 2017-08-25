@@ -1,13 +1,3 @@
-(defun new-shell (name)
-  "Opens a new shell buffer with the given name in
-asterisks (*name*) in the current directory with and changes the
-prompt to name>."
-  (interactive "sName: ")
-  (eshell)
-  (rename-buffer (concat "*" name "*")))
-
-(global-set-key (kbd "C-c s") 'new-shell)
-
 (setenv "PAGER" "cat")
 (require 'virtualenvwrapper)
 (venv-initialize-interactive-shells) ;; if you want interactive shell support

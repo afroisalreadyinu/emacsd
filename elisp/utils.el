@@ -3,13 +3,17 @@
   (insert "import pdb;pdb.set_trace()")
   (indent-for-tab-command))
 
-(defun insert-todo ()
-  (interactive)
-  (insert "# TODO-ulas: ")
-  (indent-for-tab-command))
 
-(global-set-key "\C-c2" 'insert-pdb)
-(global-set-key "\C-c3" 'insert-todo)
+(defun new-shell (name)
+  "Opens a new shell buffer with the given name in
+asterisks (*name*) in the current directory with and changes the
+prompt to name>."
+  (interactive "sName: ")
+  (shell (concat "*" name "*")))
+
+(global-set-key (kbd "C-c s") 'new-shell)
+(global-set-key (kbd "C-c 2") 'insert-pdb)
+
 
 (defun copy-file-name-to-clipboard ()
   "Copy the current buffer file name to the clipboard."
