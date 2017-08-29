@@ -81,6 +81,8 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+
 (require 'package)
 (setq package-archives
       '(("marmalade" . "https://marmalade-repo.org/packages/")
@@ -249,3 +251,6 @@
 
 (package-require 's)
 (package-require 'inf-mongo)
+
+(setq org-todo-keywords
+      '((sequence "TODO" "IN-PROGRES" "|" "DONE")))
