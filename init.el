@@ -244,6 +244,7 @@
 (package-require 'go-mode)
 (package-require 'hcl-mode)
 (add-to-list 'auto-mode-alist '("\\.tf\\'" . hcl-mode))
+
 (package-require 'virtualenvwrapper)
 (package-require 'dockerfile-mode)
 
@@ -254,3 +255,6 @@
 
 (setq org-todo-keywords
       '((sequence "TODO" "IN-PROGRES" "|" "DONE")))
+
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+(setq inferior-lisp-program "sbcl")
