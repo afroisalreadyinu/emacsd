@@ -254,7 +254,7 @@
 (package-require 'inf-mongo)
 
 (setq org-todo-keywords
-      '((sequence "TODO" "IN-PROGRES" "|" "DONE")))
+      '((sequence "TODO" "IN-PROGRESS" "DELEGATED" "|" "DONE")))
 
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "sbcl")
