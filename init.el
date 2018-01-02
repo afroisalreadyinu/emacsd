@@ -113,9 +113,8 @@
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
 (condition-case nil
-    (set-face-attribute 'default nil :font "Source Code Pro 11")
+    (set-face-attribute 'default nil :font "Inconsolata 11")
   (error (message "Source code pro not available, you'll have to live with the default font")))
-;;(set-default-font "-adobe-courier-medium-r-normal--12-120-75-75-m-70-iso8859-1")
 
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis) ;;or 'expression
