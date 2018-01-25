@@ -84,9 +84,7 @@
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
 (require 'package)
-(setq package-archives
-      '(("marmalade" . "https://marmalade-repo.org/packages/")
-        ("melpa" . "http://melpa.org/packages/")))
+(add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
 (package-initialize)
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -125,9 +123,9 @@
 ;;(set-cursor-color "red")
 (package-require 'color-theme)
 (require 'color-theme)
-(package-require 'zenburn)
-(require 'zenburn)
-(color-theme-zenburn)
+(package-require 'zenburn-theme)
+(require 'zenburn-theme)
+
 
 (package-require 'ido)
 (require 'ido)
@@ -178,7 +176,7 @@
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
-(package-require 'framemove)
+
 (require 'framemove)
 (windmove-default-keybindings)
 (setq framemove-hook-into-windmove t)
@@ -233,6 +231,7 @@
 (evil-set-initial-state 'magit-log-mode 'emacs)
 (evil-set-initial-state 'magit-popup-mode 'emacs)
 (evil-set-initial-state 'magit-refs 'emacs)
+(package-require 'evil-magit)
 
 (require 'eshell-custom)
 
@@ -244,7 +243,6 @@
 (package-require 'hcl-mode)
 (add-to-list 'auto-mode-alist '("\\.tf\\'" . hcl-mode))
 
-(package-require 'virtualenvwrapper)
 (package-require 'dockerfile-mode)
 
 (setq explicit-shell-file-name "bash")
@@ -254,8 +252,5 @@
 
 (setq org-todo-keywords
       '((sequence "TODO" "IN-PROGRESS" "DELEGATED" "|" "DONE")))
-
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "sbcl")
 
 (setq sentence-end-double-space nil)
