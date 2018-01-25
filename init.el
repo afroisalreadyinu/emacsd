@@ -107,6 +107,8 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 
+(package-require 's)
+
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 

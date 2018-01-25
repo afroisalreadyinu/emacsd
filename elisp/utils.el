@@ -1,3 +1,5 @@
+(require 's)
+
 (defun insert-pdb ()
   (interactive)
   (insert "import pdb;pdb.set_trace()")
