@@ -83,7 +83,8 @@ prompt to name>."
 
 
 (defun browse-github (arg)
-  "Open the github page of a repo. With modifier, go to file"
+  "Open the Github or Bitbucket page of a repo. With modifier, go
+to file."
   (interactive "P")
   (let* ((origin (git-cmd "config --get remote.origin.url"))
          (branch (trim (git-cmd "rev-parse --abbrev-ref HEAD")))
