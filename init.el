@@ -113,7 +113,8 @@
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
 (condition-case nil
-    (set-face-attribute 'default nil :font "Inconsolata 11")
+    ;;(set-face-attribute 'default nil :font "Inconsolata 11")
+    (set-face-attribute 'default nil :font "IBM Plex Mono 10")
   (error (message "Source code pro not available, you'll have to live with the default font")))
 
 (show-paren-mode 1)
@@ -152,6 +153,7 @@
  '(comint-scroll-to-bottom-on-input t)
  '(comint-scroll-to-bottom-on-output t)
  '(eshell-scroll-to-bottom-on-input t)
+ '(fill-column 80)
  '(load-home-init-file t t)
  '(abl-mode-install-command "pip install -r requirements.txt && python setup.py develop")
  '(abl-mode-test-path-module-class-separator ":")
@@ -256,3 +258,6 @@
       '((sequence "TODO" "IN-PROGRESS" "DELEGATED" "|" "DONE")))
 
 (setq sentence-end-double-space nil)
+
+(package-require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
