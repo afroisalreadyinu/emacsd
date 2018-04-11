@@ -155,6 +155,7 @@
  '(eshell-scroll-to-bottom-on-input t)
  '(fill-column 80)
  '(load-home-init-file t t)
+ '(fill-column 80)
  '(abl-mode-install-command "pip install -r requirements.txt && python setup.py develop")
  '(abl-mode-test-path-module-class-separator ":")
  '(js-indent-level 2))
