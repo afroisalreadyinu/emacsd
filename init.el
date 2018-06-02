@@ -146,19 +146,35 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(abl-mode-install-command
+   "pip install -r requirements.txt && python setup.py develop")
+ '(abl-mode-test-path-module-class-separator ":")
  '(comint-completion-addsuffix t)
  '(comint-completion-autolist t)
  '(comint-input-ignoredups t)
+ '(comint-move-point-for-output t)
  '(comint-scroll-show-maximum-output t)
  '(comint-scroll-to-bottom-on-input t)
- '(comint-scroll-to-bottom-on-output t)
  '(eshell-scroll-to-bottom-on-input t)
  '(fill-column 80)
+ '(js-indent-level 2)
  '(load-home-init-file t t)
- '(fill-column 80)
- '(abl-mode-install-command "pip install -r requirements.txt && python setup.py develop")
- '(abl-mode-test-path-module-class-separator ":")
- '(js-indent-level 2))
+ '(package-selected-packages
+   (quote
+    (color-theme
+     dockerfile-mode
+     evil
+     evil-magit
+     go-mode
+     hcl-mode
+     inf-mongo
+     magit
+     rainbow-delimiters
+     s
+     smex
+     turkish
+     yaml-mode
+     zenburn-theme))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
