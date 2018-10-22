@@ -161,20 +161,7 @@
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (color-theme
-     dockerfile-mode
-     evil
-     evil-magit
-     go-mode
-     hcl-mode
-     inf-mongo
-     magit
-     rainbow-delimiters
-     s
-     smex
-     turkish
-     yaml-mode
-     zenburn-theme))))
+    (csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -278,3 +265,5 @@
 
 (package-require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+(package-require 'csharp-mode)
