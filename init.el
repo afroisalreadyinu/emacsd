@@ -113,8 +113,7 @@
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
 (condition-case nil
-    ;;(set-face-attribute 'default nil :font "Inconsolata 11")
-    (set-face-attribute 'default nil :font "IBM Plex Mono 10")
+    (set-face-attribute 'default nil :font "Source Code Variable 10")
   (error (message "Source code pro not available, you'll have to live with the default font")))
 
 (show-paren-mode 1)
