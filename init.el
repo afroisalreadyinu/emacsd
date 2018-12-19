@@ -39,6 +39,7 @@
 (setq org-cycle-separator-lines 1
       org-replace-disputed-keys t
       org-log-done 'time)
+(setq org-agenda-files '("~/Documents/documents/todos/"))
 
 (server-start)
 (desktop-save-mode 1)
@@ -114,7 +115,7 @@
 
 (condition-case nil
     (set-face-attribute 'default nil :font "Source Code Variable 10")
-  (error (message "Source code pro not available, you'll have to live with the default font")))
+  (error (message "Source Code Variable not available, you'll have to live with the default font")))
 
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis) ;;or 'expression
