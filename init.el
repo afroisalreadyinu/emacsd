@@ -170,7 +170,7 @@
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))))
+    (f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -265,6 +265,7 @@
 (setq explicit-shell-file-name "bash")
 
 (package-require 's)
+(package-require 'f)
 (package-require 'inf-mongo)
 
 (setq org-todo-keywords
@@ -276,3 +277,13 @@
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 (package-require 'csharp-mode)
+
+(defun create-tags (dir-name)
+  "Create tags file."
+  (interactive "DDirectory: ")
+  (let* ((extension (file-name-extension (buffer-file-name)))
+	 (output-file (f-join dir-name "TAGS"))
+	 (command (format "find %s -type f -name \"*.%s\" | etags - -o %s"
+			  dir-name extension output-file)))
+    (message command)
+    (message (shell-command-to-string command))))
