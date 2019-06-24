@@ -119,4 +119,13 @@ to file."
 
 (global-set-key (kbd "C-c Q") 'unfill-paragraph)
 
+(defun copy-git-branch ()
+  "Show the current branch in the echo-area and add it to the `kill-ring'."
+  (interactive)
+  (let ((branch (magit-get-current-branch)))
+    (if branch
+        (progn (kill-new branch)
+               (message "%s" branch))
+      (user-error "There is not current branch"))))
+
 (provide 'utils)
