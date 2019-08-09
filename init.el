@@ -14,7 +14,8 @@
   str)
 
 (add-paths "~/.emacs.d/elisp"
-           "~/projects/abl-mode")
+           "~/projects/abl-mode"
+           "~/projects/gimme-cat")
 
 
 (setq ring-bell-function 'ignore
@@ -225,6 +226,7 @@
 
 (require 'utils)
 (require 'abl-mode)
+(require 'gimme-cat)
 
 ;;;###autoload
 (add-hook 'python-mode-hook 'abl-mode-hook)
