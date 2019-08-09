@@ -122,9 +122,13 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
-(condition-case nil
-    (set-face-attribute 'default nil :font "Source Code Variable 10")
-  (error (message "Source Code Variable not available, you'll have to live with the default font")))
+;; Alternatives: InputMono 10, Inconsolata 12, SourceCodePro 10, UbuntuMono 12, FiraCode 12
+
+(let ((font-name-size "Inconsolata 12"))
+  (condition-case nil
+      (set-face-attribute 'default nil :font font-name-size)
+    (error (message
+	    (format "%s not available, you'll have to live with the default font" font-name-size)))))
 
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis) ;;or 'expression
