@@ -41,3 +41,4 @@ elpa
 
 # Packaging
 .cask
+local-custom.el

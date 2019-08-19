@@ -15,7 +15,7 @@
 
 (add-paths "~/.emacs.d/elisp"
            "~/projects/abl-mode"
-           "~/projects/gimme-cat")
+	   "~/projects/gimme-cat")
 
 
 (setq ring-bell-function 'ignore
@@ -117,8 +117,8 @@
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
-
 (package-require 's)
+(package-require 'f)
 
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -224,6 +224,7 @@
   (lambda () (run-at-time 3 nil
     (lambda () (delete-windows-on "*Completions*")))))
 
+
 (require 'utils)
 (require 'abl-mode)
 (require 'gimme-cat)
@@ -284,7 +285,7 @@
 
 (package-require 'csharp-mode)
 
-(defun create-tags (dir-name)
+(defun create-etags (dir-name)
   "Create tags file."
   (interactive "DDirectory: ")
   (let* ((extension (file-name-extension (buffer-file-name)))
@@ -304,3 +305,9 @@
 (bash-completion-setup)
 
 (package-require 'markdown-mode)
+
+
+(let ((filename (expand-file-name
+		 "local-custom.el"
+		 (file-name-directory (buffer-file-name)))))
+  (if (file-exists-p filename) (load-file filename)))

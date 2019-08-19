@@ -9,7 +9,7 @@
               (local-set-key "\C-c2" 'insert-pdb)
               (local-set-key "\C-c3" 'insert-todo))))
 
-(defun find-import ()
+(defun find-python-import ()
   (interactive)
   (let ((current (point)))
     (re-search-backward "[\n \.\(\)\"\',]" nil t)

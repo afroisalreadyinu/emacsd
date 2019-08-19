@@ -1,17 +1,35 @@
 (require 's)
+(require 'f)
 
 (defun insert-pdb ()
   (interactive)
   (insert "import pdb;pdb.set_trace()")
   (indent-for-tab-command))
 
+(defcustom shell-profiles nil
+  "Association list of shell profiles")
+
+(defun save-shell-init-file (file-path file-lines)
+  (let ((file-content (s-join "\n" file-lines)))
+    (f-write-text file-content 'utf-8 file-path)))
 
 (defun new-shell (name)
   "Opens a new shell buffer with the given name in
 asterisks (*name*) in the current directory with and changes the
-prompt to name>."
+prompt to name>. If you want shell profiles to work, put the
+following in ~/.bashrc:
+if [ -f ~/.emacs_shell_profile_will_be_deleted ]; then
+   . ~/.emacs_shell_profile_will_be_deleted
+fi "
   (interactive "sName: ")
-  (shell (concat "*" name "*")))
+  (let ((profile (alist-get (intern name) shell-profiles))
+	(profile-file-path "~/.emacs_shell_profile_will_be_deleted"))
+    (if profile (progn
+		  (save-shell-init-file profile-file-path profile)
+		  (shell (concat "*" name "*"))
+		  (sleep-for 1)
+		  (f-delete profile-file-path))
+      (shell (concat "*" name "*")))))
 
 (global-set-key (kbd "C-c s") 'new-shell)
 (global-set-key (kbd "C-c 2") 'insert-pdb)
