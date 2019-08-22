@@ -124,8 +124,8 @@
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
 ;; Alternatives: InputMono 10, Inconsolata 12, SourceCodePro 10, UbuntuMono 12, FiraCode 12
-
-(let ((font-name-size "Inconsolata 12"))
+;; IBMPlexMono 10
+(let ((font-name-size "IBMPlexMono 10"))
   (condition-case nil
       (set-face-attribute 'default nil :font font-name-size)
     (error (message
