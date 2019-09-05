@@ -307,7 +307,6 @@
 (package-require 'markdown-mode)
 
 
-(let ((filename (expand-file-name
-		 "local-custom.el"
-		 (file-name-directory (buffer-file-name)))))
-  (if (file-exists-p filename) (load-file filename)))
+(condition-case nil
+    (require 'local-custom)
+  (error (message "No local customization file")))
