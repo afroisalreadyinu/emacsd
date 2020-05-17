@@ -138,8 +138,8 @@
 ;; To customize the background color
 ;;(set-face-background 'hl-line "khaki")  ;; Emacs 22 Only
 ;;(set-cursor-color "red")
-(package-require 'color-theme)
-(require 'color-theme)
+;;(package-require 'color-theme)
+;;(require 'color-theme)
 (package-require 'zenburn-theme)
 (require 'zenburn-theme)
 
@@ -175,7 +175,7 @@
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (markdown-mode bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))))
+    (clojure-mode markdown-mode bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -310,3 +310,5 @@
 (condition-case nil
     (require 'local-custom)
   (error (message "No local customization file")))
+
+(setq gofmt-command "/home/ulas/go/bin/goimports")
