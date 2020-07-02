@@ -34,14 +34,6 @@
 (set-language-environment "utf-8")
 (define-coding-system-alias 'UTF-8 'utf-8)
 
-;; org-mode
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c a t") 'org-todo-list)
-(setq org-cycle-separator-lines 1
-      org-replace-disputed-keys t
-      org-log-done 'time)
-(setq org-agenda-files '("~/Documents/documents/todos/"))
-
 (server-start)
 (desktop-save-mode 1)
 
@@ -83,8 +75,6 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
-(add-hook 'org-mode-hook 'turn-on-auto-fill)
-
 (add-hook 'c-mode-hook
 	  (lambda ()
 	    (unless (or (file-exists-p "makefile")
@@ -93,6 +83,7 @@
 		   (concat "make -k "
 			   (file-name-sans-extension buffer-file-name))))))
 
+(require 'orgs)
 
 (require 'package)
 (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
@@ -138,10 +129,8 @@
 ;; To customize the background color
 ;;(set-face-background 'hl-line "khaki")  ;; Emacs 22 Only
 ;;(set-cursor-color "red")
-;;(package-require 'color-theme)
-;;(require 'color-theme)
-(package-require 'zenburn-theme)
-(require 'zenburn-theme)
+;;(package-require 'zenburn-theme)
+;;(require 'zenburn-theme)
 
 
 (package-require 'ido)
@@ -175,7 +164,7 @@
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (clojure-mode markdown-mode bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))))
+    (fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -275,9 +264,6 @@
 (package-require 'f)
 (package-require 'inf-mongo)
 
-(setq org-todo-keywords
-      '((sequence "TODO" "IN-PROGRESS" "DELEGATED" "|" "DONE")))
-
 (setq sentence-end-double-space nil)
 
 (package-require 'rainbow-delimiters)
@@ -303,7 +289,6 @@
 
 (package-require 'bash-completion)
 (bash-completion-setup)
-
 (package-require 'markdown-mode)
 
 
@@ -312,3 +297,7 @@
   (error (message "No local customization file")))
 
 (setq gofmt-command "/home/ulas/go/bin/goimports")
+;; slime
+(setq inferior-lisp-program "/usr/local/bin/sbcl")
+
+(package-require 'fiplr)

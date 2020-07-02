@@ -146,4 +146,7 @@ to file."
                (message "%s" branch))
       (user-error "There is not current branch"))))
 
+(defun join-paragraph () (interactive)
+       (let ((fill-column 999999)) (fill-paragraph nil)))
+
 (provide 'utils)
