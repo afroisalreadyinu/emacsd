@@ -127,10 +127,8 @@
 
 (global-hl-line-mode 1)
 ;; To customize the background color
-;;(set-face-background 'hl-line "khaki")  ;; Emacs 22 Only
-;;(set-cursor-color "red")
-;;(package-require 'zenburn-theme)
-;;(require 'zenburn-theme)
+(package-require 'zenburn-theme)
+(require 'zenburn-theme)
 
 
 (package-require 'ido)
