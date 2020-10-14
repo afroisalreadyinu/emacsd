@@ -128,7 +128,7 @@
 (global-hl-line-mode 1)
 ;; To customize the background color
 (package-require 'zenburn-theme)
-(require 'zenburn-theme)
+(load-theme 'zenburn t)
 
 
 (package-require 'ido)
@@ -162,7 +162,7 @@
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))))
+    (ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
