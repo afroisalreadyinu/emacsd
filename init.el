@@ -162,7 +162,7 @@
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))))
+    (js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -299,3 +299,13 @@
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
 (package-require 'fiplr)
+
+(package-require 'ob-go)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((go . t)))
+(put 'downcase-region 'disabled nil)
+
+(package-require 'js2-mode)
+(package-require 'rjsx-mode)
+(require 'rjsx-mode)
