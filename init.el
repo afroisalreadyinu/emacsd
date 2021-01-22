@@ -312,5 +312,6 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
 (package-require 'lsp-mode)
+(setq lsp-keymap-prefix "C-c C-l")
 (require 'lsp-mode)
 (add-hook 'go-mode-hook #'lsp-deferred)
