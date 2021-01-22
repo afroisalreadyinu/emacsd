@@ -161,8 +161,7 @@
  '(js-indent-level 2)
  '(load-home-init-file t t)
  '(package-selected-packages
-   (quote
-    (js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))))
+   '(eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -295,6 +294,7 @@
   (error (message "No local customization file")))
 
 (setq gofmt-command "/home/ulas/go/bin/goimports")
+
 ;; slime
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
@@ -310,3 +310,7 @@
 (package-require 'rjsx-mode)
 (require 'rjsx-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+
+(package-require 'lsp-mode)
+(require 'lsp-mode)
+(add-hook 'go-mode-hook #'lsp-deferred)
