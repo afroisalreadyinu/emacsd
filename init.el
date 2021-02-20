@@ -234,6 +234,7 @@
 (evil-set-initial-state 'magit-log-mode 'emacs)
 (evil-set-initial-state 'magit-popup-mode 'emacs)
 (evil-set-initial-state 'magit-refs 'emacs)
+(evil-set-initial-state 'vterm-mode 'emacs)
 (package-require 'evil-magit)
 
 (require 'eshell-custom)
