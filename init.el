@@ -13,10 +13,6 @@
     (setq str (replace-match "" t t str)))
   str)
 
-(add-paths "~/.emacs.d/elisp"
-           "~/projects/abl-mode"
-	   "~/projects/gimme-cat")
-
 
 (setq ring-bell-function 'ignore
       confirm-kill-emacs 'y-or-n-p
@@ -72,8 +68,6 @@
           (lambda () (add-hook 'before-save-hook (lambda () (untabify (point-min) (point-max))) nil t)))
 (add-hook 'javascript-mode-hook
           (lambda () (add-hook 'before-save-hook (lambda () (untabify (point-min) (point-max))) nil t)))
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
 (add-hook 'c-mode-hook
 	  (lambda ()
@@ -82,6 +76,9 @@
 	      (set (make-local-variable 'compile-command)
 		   (concat "make -k "
 			   (file-name-sans-extension buffer-file-name))))))
+(add-paths "~/.emacs.d/elisp"
+           "~/projects/abl-mode"
+	   "~/projects/gimme-cat")
 
 (require 'orgs)
 
@@ -101,6 +98,7 @@
 (use-package vterm :load-path  "~/code/emacs-libvterm")
 ;; smex
 (package-require 'smex)
+
 (require 'smex)
 (smex-initialize)
 (global-set-key "\C-x\C-m" 'smex)
@@ -144,6 +142,10 @@
   uniquify-separator ":")
 (setq ido-enable-flex-matching t) ;; enable fuzzy matching
 
+(require 'utils)
+(require 'abl-mode)
+(require 'gimme-cat)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -164,7 +166,8 @@
  '(js-indent-level 2)
  '(load-home-init-file t t)
  '(package-selected-packages
-   '(vtrem use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme)))
+   (quote
+    (framemove lsp-mode vtrem use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -181,16 +184,17 @@
 (if (functionp 'x-cut-buffer-or-selection-value)
   (setq interprogram-paste-function 'x-cut-buffer-or-selection-value))
 
-(package-require 'recentf)
-(require 'recentf)
-(recentf-mode 1)
-(setq recentf-max-menu-items 25)
-(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+(use-package recentf
+  :ensure t
+  :bind (("C-x C-r" . recentf-open-files))
+  :config (recentf-mode 1)
+  (setq recentf-max-menu-items 25))
 
 
-(require 'framemove)
-(windmove-default-keybindings)
-(setq framemove-hook-into-windmove t)
+(use-package framemove
+  :load-path "~/.emacs.d/elisp"
+  :config (windmove-default-keybindings)
+  (setq framemove-hook-into-windmove t))
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
@@ -198,35 +202,21 @@
 
 ; interpret and use ansi color codes in shell output windows
 (ansi-color-for-comint-mode-on)
-;;(add-hook 'comint-mode-hook
-;;        (lambda ()
-;;          (add-to-list
-;;           'comint-preoutput-filter-functions
-;;           (lambda (output)
-;;             (replace-regexp-in-string "\033\\[[0-9]+[GK]" "" output)
-;;             ;(replace-regexp-in-string "\033\\[[0-9]+[A-Z]" "" output)
-;;             ))))
-;;
 
 ; make completion buffers disappear after 3 seconds.
 (add-hook 'completion-setup-hook
   (lambda () (run-at-time 3 nil
     (lambda () (delete-windows-on "*Completions*")))))
 
-
-(require 'utils)
-(require 'abl-mode)
-(require 'gimme-cat)
-
 ;;;###autoload
 (add-hook 'python-mode-hook 'abl-mode-hook)
 
-(package-require 'magit)
-(require 'magit)
-(global-set-key "\C-c\g" 'magit-status)
-(global-set-key "\C-c\w" 'magit-branch-manager)
-(setq magit-default-tracking-name-function (lambda (remote branch) branch))
-(setq magit-push-always-verify nil)
+(use-package magit
+  :ensure t
+  :bind (("C-c g" . magit-status)
+	 ("C-c w" . magit-branch-manager))
+  :config (setq magit-default-tracking-name-function (lambda (remote branch) branch))
+  (setq magit-push-always-verify nil))
 
 (package-require 'yaml-mode)
 (require 'yaml-mode)
