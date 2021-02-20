@@ -77,7 +77,6 @@
 		   (concat "make -k "
 			   (file-name-sans-extension buffer-file-name))))))
 (add-paths "~/.emacs.d/elisp"
-           "~/projects/abl-mode"
 	   "~/projects/gimme-cat")
 
 (require 'orgs)
@@ -143,8 +142,14 @@
 (setq ido-enable-flex-matching t) ;; enable fuzzy matching
 
 (require 'utils)
-(require 'abl-mode)
 (require 'gimme-cat)
+
+(use-package abl-mode
+  :load-path "~/projects/abl-mode"
+  :config (setq abl-mode-install-command
+		"pip install -r requirements.txt && python setup.py develop")
+  (setq abl-mode-test-path-module-class-separator ":")
+  :hook python-mode)
 
 
 (custom-set-variables
@@ -152,9 +157,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(abl-mode-install-command
-   "pip install -r requirements.txt && python setup.py develop")
- '(abl-mode-test-path-module-class-separator ":")
  '(comint-completion-addsuffix t)
  '(comint-completion-autolist t)
  '(comint-input-ignoredups t)
@@ -196,9 +198,11 @@
   :config (windmove-default-keybindings)
   (setq framemove-hook-into-windmove t))
 
-(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
+(use-package javascript-mode
+  :commands javascript
+  :mode "\\.js\\'")
+
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
-(autoload 'javascript-mode "javascript" nil t)
 
 ; interpret and use ansi color codes in shell output windows
 (ansi-color-for-comint-mode-on)
@@ -208,9 +212,6 @@
   (lambda () (run-at-time 3 nil
     (lambda () (delete-windows-on "*Completions*")))))
 
-;;;###autoload
-(add-hook 'python-mode-hook 'abl-mode-hook)
-
 (use-package magit
   :ensure t
   :bind (("C-c g" . magit-status)
@@ -218,9 +219,8 @@
   :config (setq magit-default-tracking-name-function (lambda (remote branch) branch))
   (setq magit-push-always-verify nil))
 
-(package-require 'yaml-mode)
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(use-package yaml-mode
+  :mode "\\.yml$")
 
 (package-require 'evil)
 (require 'evil)
