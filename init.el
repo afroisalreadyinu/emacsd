@@ -164,7 +164,7 @@
  '(js-indent-level 2)
  '(load-home-init-file t t)
  '(package-selected-packages
-   '(use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme)))
+   '(vtrem use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
