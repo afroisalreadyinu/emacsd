@@ -146,9 +146,8 @@
 
 (use-package abl-mode
   :load-path "~/projects/abl-mode"
-  :config (setq abl-mode-install-command
-		"pip install -r requirements.txt && python setup.py develop")
-  (setq abl-mode-test-path-module-class-separator ":")
+  :custom (abl-mode-install-command "pip install -r requirements.txt && python setup.py develop")
+  (abl-mode-test-path-module-class-separator ":")
   :hook python-mode)
 
 
@@ -222,20 +221,25 @@
 (use-package yaml-mode
   :mode "\\.yml$")
 
-(package-require 'evil)
-(require 'evil)
-(setq evil-want-fine-undo t)
-(define-key evil-normal-state-map (kbd "TAB") 'indent-for-tab-command)
-(define-key evil-normal-state-map (kbd "C-r") 'isearch-backward)
+(use-package evil
+  :ensure t
+  :custom (evil-want-fine-undo t "Want finer undo")
+  :commands (evil-mode)
+  :config
+  (evil-set-initial-state 'magit-mode 'emacs)
+  (evil-set-initial-state 'magit-status-mode 'emacs)
+  (evil-set-initial-state 'magit-diff-mode 'emacs)
+  (evil-set-initial-state 'magit-log-mode 'emacs)
+  (evil-set-initial-state 'magit-popup-mode 'emacs)
+  (evil-set-initial-state 'magit-refs 'emacs)
+  (evil-set-initial-state 'vterm-mode 'emacs)
+  :bind (:map evil-normal-state-map
+	      ("[tab]" . indent-for-tab-command)
+	      ("C-r" . isearch-backward)))
+
 (evil-mode 1)
-(evil-set-initial-state 'magit-mode 'emacs)
-(evil-set-initial-state 'magit-status-mode 'emacs)
-(evil-set-initial-state 'magit-diff-mode 'emacs)
-(evil-set-initial-state 'magit-log-mode 'emacs)
-(evil-set-initial-state 'magit-popup-mode 'emacs)
-(evil-set-initial-state 'magit-refs 'emacs)
-(evil-set-initial-state 'vterm-mode 'emacs)
-(package-require 'evil-magit)
+
+(use-package evil-magit :ensure t :after evil)
 
 (require 'eshell-custom)
 
