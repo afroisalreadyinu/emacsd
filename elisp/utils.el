@@ -149,4 +149,11 @@ to file."
 (defun join-paragraph () (interactive)
        (let ((fill-column 999999)) (fill-paragraph nil)))
 
+(defun increase-font-size (&optional new-height) (interactive "p")
+  (let* ((current-size (* 10 (round (/ (face-attribute 'default :height) 10.0))))
+	 ;; Due to some reason, new-height is 1 if there is no prefix arg
+	 (new-size (if (eq new-height 1) (+ current-size 10) new-height)))
+    (set-face-attribute 'default nil :height new-size)
+    (message (format "Set font height to %d percent" new-size))))
+
 (provide 'utils)
