@@ -219,6 +219,7 @@
   (setq magit-push-always-verify nil))
 
 (use-package yaml-mode
+  :ensure t
   :mode "\\.yml$")
 
 (use-package evil
@@ -239,7 +240,11 @@
 
 (evil-mode 1)
 
-(use-package evil-magit :ensure t :after evil)
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
 
 (require 'eshell-custom)
 
