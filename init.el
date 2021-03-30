@@ -167,8 +167,7 @@
  '(js-indent-level 2)
  '(load-home-init-file t t)
  '(package-selected-packages
-   (quote
-    (framemove lsp-mode vtrem use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))))
+   '(evil-collection framemove lsp-mode vtrem use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -222,10 +221,17 @@
   :ensure t
   :mode "\\.yml$")
 
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+
 (use-package evil
   :ensure t
   :custom (evil-want-fine-undo t "Want finer undo")
   :commands (evil-mode)
+  :init (setq evil-want-integration t) (setq evil-want-keybinding nil)
   :config
   (evil-set-initial-state 'magit-mode 'emacs)
   (evil-set-initial-state 'magit-status-mode 'emacs)
@@ -239,12 +245,6 @@
 	      ("C-r" . isearch-backward)))
 
 (evil-mode 1)
-
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :config
-  (evil-collection-init))
 
 (require 'eshell-custom)
 
