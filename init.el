@@ -221,17 +221,11 @@
   :ensure t
   :mode "\\.yml$")
 
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :config
-  (evil-collection-init))
-
 (use-package evil
   :ensure t
   :custom (evil-want-fine-undo t "Want finer undo")
   :commands (evil-mode)
-  :init (setq evil-want-integration t) (setq evil-want-keybinding nil)
+  :init (evil-mode 1)
   :config
   (evil-set-initial-state 'magit-mode 'emacs)
   (evil-set-initial-state 'magit-status-mode 'emacs)
@@ -243,8 +237,6 @@
   :bind (:map evil-normal-state-map
 	      ("[tab]" . indent-for-tab-command)
 	      ("C-r" . isearch-backward)))
-
-(evil-mode 1)
 
 (require 'eshell-custom)
 
