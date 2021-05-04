@@ -246,11 +246,12 @@
 (setq explicit-shell-file-name "bash")
 (setq sentence-end-double-space nil)
 
-(package-require 's)
-(package-require 'f)
-(package-require 'inf-mongo)
-(package-require 'csharp-mode)
-(package-require 'markdown-mode)
+(use-package inf-mongo :ensure t)
+(use-package csharp-mode :ensure t)
+(use-package markdown-mode :ensure t)
+(use-package fiplr :ensure t)
+(use-package js2-mode :ensure t)
+(use-package rjsx-mode :ensure t :mode "\\.js$")
 
 (defun create-etags (dir-name)
   "Create tags file."
@@ -278,18 +279,11 @@
 ;; slime
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
-(package-require 'fiplr)
-
 (package-require 'ob-go)
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((go . t)))
 (put 'downcase-region 'disabled nil)
-
-(package-require 'js2-mode)
-(package-require 'rjsx-mode)
-(require 'rjsx-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
 (package-require 'lsp-mode)
 (setq lsp-keymap-prefix "C-c C-l")
