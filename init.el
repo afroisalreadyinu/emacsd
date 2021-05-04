@@ -95,18 +95,15 @@
 (package-require 'use-package)
 
 (use-package vterm :load-path  "~/code/emacs-libvterm")
-;; smex
-(package-require 'smex)
 
-(require 'smex)
-(smex-initialize)
-(global-set-key "\C-x\C-m" 'smex)
-(global-set-key "\C-c\C-m" 'smex)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "s-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-;; This is your old M-x.
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+(use-package smex
+  :ensure t
+  :bind (("M-x" . smex)
+	 ("s-x" . smex)
+         ("M-X" . smex-major-mode-commands)
+	 ;; This is your old M-x.
+         ("C-c C-c M-x" . execute-extended-command))
+  :config (smex-initialize))
 
 (package-require 's)
 (package-require 'f)
@@ -240,28 +237,20 @@
 
 (require 'eshell-custom)
 
-(package-require 'turkish)
-(require 'turkish)
-
-
-(package-require 'go-mode)
-(package-require 'hcl-mode)
-(add-to-list 'auto-mode-alist '("\\.tf\\'" . hcl-mode))
-
-(package-require 'dockerfile-mode)
+(use-package turkish :ensure t)
+(use-package go-mode :ensure t)
+(use-package hcl-mode :ensure t :mode "\\.tf$")
+(use-package dockerfile-mode :ensure t)
+(use-package bash-completion :ensure t :config (bash-completion-setup))
 
 (setq explicit-shell-file-name "bash")
+(setq sentence-end-double-space nil)
 
 (package-require 's)
 (package-require 'f)
 (package-require 'inf-mongo)
-
-(setq sentence-end-double-space nil)
-
-(package-require 'rainbow-delimiters)
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-
 (package-require 'csharp-mode)
+(package-require 'markdown-mode)
 
 (defun create-etags (dir-name)
   "Create tags file."
@@ -278,10 +267,6 @@
             (add-hook 'before-save-hook 'gofmt-before-save)
             (setq tab-width 4)
             (setq indent-tabs-mode 1)))
-
-(package-require 'bash-completion)
-(bash-completion-setup)
-(package-require 'markdown-mode)
 
 
 (condition-case nil
