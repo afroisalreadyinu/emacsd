@@ -1,18 +1,5 @@
-(defun starts-with (str1 str2)
-  (and (> (length str1) 0)
-       (string= str2
-                (substring str1 0 (length str2)))))
-
 (defun add-paths (&rest paths)
   (mapcar (lambda (x) (add-to-list 'load-path x)) paths))
-
-(defun trim (str)
-  "Trim leading and tailing whitespace from STR."
-  (while (string-match "\\`\n+\\|^\\s-+\\|\\s-+$\\|\n+\\'"
-                       str)
-    (setq str (replace-match "" t t str)))
-  str)
-
 
 (setq ring-bell-function 'ignore
       confirm-kill-emacs 'y-or-n-p
