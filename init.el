@@ -21,6 +21,11 @@
 (server-start)
 (desktop-save-mode 1)
 
+; make completion buffers disappear after 3 seconds.
+(add-hook 'completion-setup-hook
+  (lambda () (run-at-time 3 nil
+    (lambda () (delete-windows-on "*Completions*")))))
+
 (when (eq system-type 'darwin)
   (setenv "PATH" (concat "/opt/local/bin:/opt/local/sbin:/usr/local/git/bin:/usr/local/bin:" (getenv "PATH")))
   (setq exec-path (append '("/opt/local/bin" "/opt/local/sbin" "/usr/local/bin") exec-path)))
@@ -183,11 +188,6 @@
 ; interpret and use ansi color codes in shell output windows
 (ansi-color-for-comint-mode-on)
 
-; make completion buffers disappear after 3 seconds.
-(add-hook 'completion-setup-hook
-  (lambda () (run-at-time 3 nil
-    (lambda () (delete-windows-on "*Completions*")))))
-
 (use-package magit
   :ensure t
   :bind (("C-c g" . magit-status)
@@ -266,7 +266,7 @@
  '((go . t)))
 (put 'downcase-region 'disabled nil)
 
-(package-require 'lsp-mode)
-(setq lsp-keymap-prefix "C-c C-l")
-(require 'lsp-mode)
-(add-hook 'go-mode-hook #'lsp-deferred)
+(use-package lsp-mode
+  :ensure t
+  :init (setq lsp-keymap-prefix "C-c C-l")
+  :config (add-hook 'go-mode-hook #'lsp-deferred))
