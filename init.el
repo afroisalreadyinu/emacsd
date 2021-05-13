@@ -16,15 +16,14 @@
 
 (set-language-environment "utf-8")
 (define-coding-system-alias 'UTF-8 'utf-8)
-
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (server-start)
 (desktop-save-mode 1)
-
 
 (when (eq system-type 'darwin)
   (setenv "PATH" (concat "/opt/local/bin:/opt/local/sbin:/usr/local/git/bin:/usr/local/bin:" (getenv "PATH")))
   (setq exec-path (append '("/opt/local/bin" "/opt/local/sbin" "/usr/local/bin") exec-path)))
-
 
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key (kbd "s-!") 'shell-command)
@@ -34,7 +33,6 @@
 (global-set-key (kbd "C-c b") '(lambda () (interactive) (message (buffer-file-name))))
 (global-set-key [(C tab)] 'ibuffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-;;(global-set-key (kbd "C-z")  '(lambda () (interactive) (message "Have a nice day!")))
 (global-set-key (kbd "s-m")  '(lambda () (interactive) (message "Have a nice day!")))
 (global-set-key (kbd "M-SPC")  '(lambda () (interactive) (just-one-space -1)))
 (global-set-key (kbd "s-w")  'kill-buffer)
@@ -80,6 +78,8 @@
     (package-install pkg)))
 
 (package-require 'use-package)
+(package-require 's)
+(package-require 'f)
 
 (use-package vterm :load-path  "~/code/emacs-libvterm")
 
@@ -91,12 +91,6 @@
 	 ;; This is your old M-x.
          ("C-c C-c M-x" . execute-extended-command))
   :config (smex-initialize))
-
-(package-require 's)
-(package-require 'f)
-
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
 ;; Alternatives: InputMono 10, Inconsolata 12, SourceCodePro 10, UbuntuMono 12, FiraCode 12
 ;; IBMPlexMono 10
