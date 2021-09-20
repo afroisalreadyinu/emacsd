@@ -4,7 +4,8 @@
 (defun insert-pdb ()
   (interactive)
   (insert "import pdb;pdb.set_trace()")
-  (indent-for-tab-command))
+  (indent-for-tab-command)
+  (save-buffer))
 
 (defcustom shell-profiles nil
   "Association list of shell profiles")
@@ -105,7 +106,7 @@ fi "
 to file."
   (interactive "P")
   (let* ((origin (git-cmd "config --get remote.origin.url"))
-         (branch (trim (git-cmd "rev-parse --abbrev-ref HEAD")))
+         (branch (s-trim (git-cmd "rev-parse --abbrev-ref HEAD")))
 	 (git-base (expand-file-name (locate-dominating-file (buffer-file-name) ".git")))
 	 (filepath (file-relative-name (buffer-file-name) git-base))
 	 (urls (if (s-contains? "github.com" origin)
