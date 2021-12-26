@@ -157,4 +157,21 @@ to file."
     (set-face-attribute 'default nil :height new-size)
     (message (format "Set font height to %d percent" new-size))))
 
+(defun fetch-page-title (&rest args)
+  (let* ((page-tree (libxml-parse-html-region (point-min) (point-max)))
+	 (titles (dom-by-tag page-tree 'title))
+	 (url (cadr args))
+	 (target-buffer (nth 1 (cdr args)))
+	 (target-point (nth 2 (cdr args))))
+    (message "URL: %s" url)
+    (if (null titles) (error "Title not found on page")
+      (save-excursion
+	(switch-to-buffer target-buffer)
+	(goto-char target-point)
+	(insert (format "[[%s][%s]]" url (caddar titles)))))))
+
+(defun insert-with-title (target-url) (interactive "sURL: ")
+  (let ((argument (list target-url (current-buffer) (point))))
+    (url-retrieve target-url #'fetch-page-title argument 't)))
+
 (provide 'utils)
