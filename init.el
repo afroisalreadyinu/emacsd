@@ -150,7 +150,7 @@
  '(js-indent-level 2)
  '(load-home-init-file t t)
  '(package-selected-packages
-   '(evil-collection framemove lsp-mode vtrem use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme)))
+   '(org-cliplink evil-collection framemove lsp-mode vtrem use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -233,6 +233,7 @@
 (use-package fiplr :ensure t)
 (use-package js2-mode :ensure t)
 (use-package rjsx-mode :ensure t :mode "\\.js$")
+(use-package org-cliplink :ensure t)
 
 (defun create-etags (dir-name)
   "Create tags file."
