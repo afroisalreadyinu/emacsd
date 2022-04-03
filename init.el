@@ -267,9 +267,14 @@
  '((go . t)))
 (put 'downcase-region 'disabled nil)
 
+;; TODO how to make sure
+;; npm i -g typescript-language-server; npm i -g typescript
+;; has been executed
+;; also same thing for go get golang.org/x/tools/gopls
 (use-package lsp-mode
   :ensure t
   :init (setq lsp-keymap-prefix "C-c C-l")
-  :config (add-hook 'go-mode-hook #'lsp-deferred))
+  :config (add-hook 'go-mode-hook #'lsp-deferred)
+  (add-hook 'typescript-mode-hook #'lsp-deferred))
 
 (use-package typescript-mode :ensure t)
