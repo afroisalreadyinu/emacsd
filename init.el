@@ -150,7 +150,8 @@
  '(js-indent-level 2)
  '(load-home-init-file t t)
  '(package-selected-packages
-   '(typescript-mode org-cliplink evil-collection framemove lsp-mode vtrem use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme)))
+   '(typescript-mode org-cliplink evil-collection framemove lsp-mode vtrem use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))
+ '(warning-suppress-log-types '((comp))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -256,7 +257,7 @@
     (require 'local-custom)
   (error (message "No local customization file")))
 
-(setq gofmt-command "/home/ulas/go/bin/goimports")
+(setq gofmt-command "~/go/bin/goimports")
 
 ;; slime
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
