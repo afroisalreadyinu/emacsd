@@ -99,7 +99,7 @@
 
 ;; Alternatives: InputMono 10, Inconsolata 12, SourceCodePro 10, UbuntuMono 12, FiraCode 12
 ;; IBMPlexMono 10
-(let ((font-name-size "IBM Plex Mono 10"))
+(let ((font-name-size "IBM Plex Mono 12"))
   (condition-case nil
       (set-face-attribute 'default nil :font font-name-size)
     (error (message
@@ -150,8 +150,7 @@
  '(js-indent-level 2)
  '(load-home-init-file t t)
  '(package-selected-packages
-   '(typescript-mode org-cliplink evil-collection framemove lsp-mode vtrem use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))
- '(warning-suppress-log-types '((comp))))
+   '(emmet-mode typescript-mode org-cliplink evil-collection framemove lsp-mode vtrem use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -279,3 +278,11 @@
   (add-hook 'typescript-mode-hook #'lsp-deferred))
 
 (use-package typescript-mode :ensure t)
+
+(use-package emmet-mode
+  :ensure t
+  :config (add-hook 'sgml-mode-hook 'emmet-mode) (add-hook 'css-mode-hook  'emmet-mode))
+
+(setq *fiplr-default-ignored-globs*
+  '((directories (".git" ".svn" ".hg" ".bzr" "node_modules"))
+    (files (".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip"))))
