@@ -231,7 +231,14 @@
 (use-package inf-mongo :ensure t)
 (use-package csharp-mode :ensure t)
 (use-package markdown-mode :ensure t)
-(use-package fiplr :ensure t)
+
+(use-package fiplr :ensure t
+  :custom
+  (fiplr-ignored-globs
+  '((directories (".git" ".svn" ".hg" ".bzr" "node_modules"))
+    (files (".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip")))))
+
+
 (use-package js2-mode :ensure t)
 (use-package rjsx-mode :ensure t :mode "\\.js$")
 (use-package org-cliplink :ensure t)
@@ -283,10 +290,6 @@
 (use-package emmet-mode
   :ensure t
   :config (add-hook 'sgml-mode-hook 'emmet-mode) (add-hook 'css-mode-hook  'emmet-mode))
-
-(setq *fiplr-default-ignored-globs*
-  '((directories (".git" ".svn" ".hg" ".bzr" "node_modules"))
-    (files (".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip"))))
 
 (use-package python-black
   :ensure t
