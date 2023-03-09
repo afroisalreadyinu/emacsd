@@ -290,9 +290,3 @@
 (use-package emmet-mode
   :ensure t
   :config (add-hook 'sgml-mode-hook 'emmet-mode) (add-hook 'css-mode-hook  'emmet-mode))
-
-(use-package python-black
-  :ensure t
-  :after python
-  :config (setq python-black-command "/home/ulas/.local/bin/black")
-  :hook (python-mode . python-black-on-save-mode))
