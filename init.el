@@ -150,7 +150,7 @@
  '(js-indent-level 2)
  '(load-home-init-file t t)
  '(package-selected-packages
-   '(emmet-mode typescript-mode org-cliplink evil-collection framemove lsp-mode vtrem use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))
+   '(emmet-mode typescript-mode org-cliplink evil-collection framemove vtrem use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))
  '(warning-suppress-log-types '((comp))))
 
 (custom-set-faces
@@ -233,10 +233,11 @@
 (use-package markdown-mode :ensure t)
 
 (use-package fiplr :ensure t
+  :bind (("C-x f" . fiplr-find-file))
   :custom
   (fiplr-ignored-globs
   '((directories (".git" ".svn" ".hg" ".bzr" "node_modules"))
-    (files (".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip")))))
+    (files (".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip" "*.pyc")))))
 
 
 (use-package js2-mode :ensure t)
@@ -279,11 +280,11 @@
 ;; npm i -g typescript-language-server; npm i -g typescript
 ;; has been executed
 ;; also same thing for go get golang.org/x/tools/gopls
-(use-package lsp-mode
-  :ensure t
-  :init (setq lsp-keymap-prefix "C-c C-l")
-  :config (add-hook 'go-mode-hook #'lsp-deferred)
-  (add-hook 'typescript-mode-hook #'lsp-deferred))
+;; (use-package lsp-mode
+;;   :ensure t
+;;   :init (setq lsp-keymap-prefix "C-c C-l")
+;;   :config (add-hook 'go-mode-hook #'lsp-deferred)
+;;   (add-hook 'typescript-mode-hook #'lsp-deferred))
 
 (use-package typescript-mode :ensure t)
 
