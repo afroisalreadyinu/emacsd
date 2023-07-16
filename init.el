@@ -99,7 +99,7 @@
 
 ;; Alternatives: InputMono 10, Inconsolata 12, SourceCodePro 10, UbuntuMono 12, FiraCode 12
 ;; IBMPlexMono 10
-(let ((font-name-size "IBM Plex Mono 12"))
+(let ((font-name-size "IBM Plex Mono 10"))
   (condition-case nil
       (set-face-attribute 'default nil :font font-name-size)
     (error (message
@@ -236,8 +236,8 @@
   :bind (("C-x f" . fiplr-find-file))
   :custom
   (fiplr-ignored-globs
-  '((directories (".git" ".svn" ".hg" ".bzr" "node_modules"))
-    (files (".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip" "*.pyc")))))
+  '((directories (".git" ".svn" ".hg" ".bzr" "node_modules" ".mypy_cache"))
+    (files (".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.pyc" "*.gz" "*.zip")))))
 
 
 (use-package js2-mode :ensure t)
