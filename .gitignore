@@ -39,6 +39,8 @@ elpa
 /ido.last
 /recentf
 /smex-items
+/tree-sitter/
+/eln-cache/
 
 # Packaging
 .cask
