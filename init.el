@@ -1,6 +1,7 @@
 (defun add-paths (&rest paths)
   (mapcar (lambda (x) (add-to-list 'load-path x)) paths))
 
+
 (setq ring-bell-function 'ignore
       confirm-kill-emacs 'y-or-n-p
       inhibit-startup-message t
@@ -66,8 +67,7 @@
 	      (set (make-local-variable 'compile-command)
 		   (concat "make -k "
 			   (file-name-sans-extension buffer-file-name))))))
-(add-paths "~/.emacs.d/elisp"
-	   "~/projects/gimme-cat")
+(add-paths "~/.emacs.d/elisp")
 
 (require 'orgs)
 
@@ -85,8 +85,6 @@
 (package-require 'use-package)
 (package-require 's)
 (package-require 'f)
-
-(use-package vterm :load-path  "~/code/emacs-libvterm")
 
 (use-package smex
   :ensure t
@@ -125,7 +123,6 @@
 (setq ido-enable-flex-matching t) ;; enable fuzzy matching
 
 (require 'utils)
-(require 'gimme-cat)
 
 (use-package abl-mode
   :load-path "~/projects/abl-mode"
@@ -150,7 +147,13 @@
  '(js-indent-level 2)
  '(load-home-init-file t t)
  '(package-selected-packages
-   '(projectile emmet-mode typescript-mode org-cliplink evil-collection framemove vtrem use-package eglot js2-mode rjsx-mode ob-go fiplr clojure-mode markdown-mode slime bash-completion highlight f csharp-mode rainbow-delimiters inf-mongo dockerfile-mode hcl-mode go-mode turkish evil-magit evil yaml-mode magit zenburn-theme smex s color-theme))
+   '(bash-completion clojure-mode color-theme csharp-mode dockerfile-mode eglot
+		     emmet-mode evil evil-collection evil-magit f fiplr
+		     fish-mode framemove go-mode hcl-mode highlight inf-mongo
+		     js2-mode magit markdown-mode ob-go org-cliplink projectile
+		     rainbow-delimiters rjsx-mode s scala-mode slime smex
+		     tree-sitter tree-sitter-langs turkish typescript-mode
+		     use-package vtrem yaml-mode zenburn-theme))
  '(warning-suppress-log-types '((comp))))
 
 (custom-set-faces
@@ -212,7 +215,6 @@
   (evil-set-initial-state 'magit-log-mode 'emacs)
   (evil-set-initial-state 'magit-popup-mode 'emacs)
   (evil-set-initial-state 'magit-refs 'emacs)
-  (evil-set-initial-state 'vterm-mode 'emacs)
   :bind (:map evil-normal-state-map
 	      ("[tab]" . indent-for-tab-command)
 	      ("C-r" . isearch-backward)))
@@ -300,6 +302,13 @@
               ("s-p" . projectile-command-map)
               ("C-c p" . projectile-command-map)))
 
+(use-package scala-mode
+  :ensure t
+  :interpreter
+    ("scala" . scala-mode))
+
+(use-package fish-mode :ensure t)
+
 ;; tree-sitter
 (setq treesit-language-source-alist
    '((bash "https://github.com/tree-sitter/tree-sitter-bash")
@@ -317,3 +326,6 @@
      (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
      (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
      (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
+(use-package tree-sitter :ensure t)
+(use-package tree-sitter-langs :ensure t)
