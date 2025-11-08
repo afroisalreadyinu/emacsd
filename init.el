@@ -45,6 +45,7 @@
 (global-set-key (kbd "s-s")  'save-buffer)
 (global-set-key (kbd "s-0")  'delete-window)
 (global-unset-key (kbd "s-k"))
+(global-set-key (kbd "C-c d") 'xref-find-definitions)
 
 (setq ibuffer-expert t
       ibuffer-show-empty-filter-groups nil
@@ -215,6 +216,8 @@
   (evil-set-initial-state 'magit-log-mode 'emacs)
   (evil-set-initial-state 'magit-popup-mode 'emacs)
   (evil-set-initial-state 'magit-refs 'emacs)
+  (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
+
   :bind (:map evil-normal-state-map
 	      ("[tab]" . indent-for-tab-command)
 	      ("C-r" . isearch-backward)))
