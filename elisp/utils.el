@@ -7,6 +7,12 @@
   (indent-for-tab-command)
   (save-buffer))
 
+(defun insert-ipdb ()
+  (interactive)
+  (insert "import ipdb;ipdb.set_trace()")
+  (indent-for-tab-command)
+  (save-buffer))
+
 (defcustom shell-profiles nil
   "Association list of shell profiles")
 
@@ -34,6 +40,7 @@ fi "
 
 (global-set-key (kbd "C-c s") 'new-shell)
 (global-set-key (kbd "C-c 2") 'insert-pdb)
+(global-set-key (kbd "C-c 3") 'insert-ipdb)
 
 
 (defun copy-file-name-to-clipboard ()

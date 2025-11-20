@@ -312,6 +312,8 @@
 
 (use-package fish-mode :ensure t)
 
+(use-package clojure-mode :ensure t)
+
 ;; tree-sitter
 (setq treesit-language-source-alist
    '((bash "https://github.com/tree-sitter/tree-sitter-bash")
