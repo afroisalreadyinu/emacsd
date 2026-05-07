@@ -144,16 +144,17 @@
  '(comint-scroll-show-maximum-output t)
  '(comint-scroll-to-bottom-on-input t)
  '(eshell-scroll-to-bottom-on-input t)
- '(fill-column 80)
+ '(fill-column 100)
  '(js-indent-level 2)
  '(load-home-init-file t t)
+ '(org-src-fontify-natively t)
  '(package-selected-packages
    '(bash-completion clojure-mode color-theme csharp-mode dockerfile-mode eglot
 		     emmet-mode evil evil-collection evil-magit f fiplr
 		     fish-mode framemove go-mode hcl-mode highlight inf-mongo
 		     js2-mode magit markdown-mode ob-go org-cliplink projectile
-		     rainbow-delimiters rjsx-mode s scala-mode slime smex
-		     tree-sitter tree-sitter-langs turkish typescript-mode
+		     rainbow-delimiters rjsx-mode rust-mode s scala-mode slime
+		     smex tree-sitter tree-sitter-langs turkish typescript-mode
 		     use-package vtrem yaml-mode zenburn-theme))
  '(warning-suppress-log-types '((comp))))
 
@@ -248,6 +249,12 @@
 (use-package js2-mode :ensure t)
 (use-package rjsx-mode :ensure t :mode "\\.js$")
 (use-package org-cliplink :ensure t)
+(use-package rust-mode :ensure t)
+(use-package rust-mode
+  :ensure t
+  :init (setq rust-mode-treesitter-derive t)
+  :config (add-hook 'rust-mode-hook (lambda () (setq indent-tabs-mode nil)))
+  )
 
 (defun create-etags (dir-name)
   "Create tags file."
