@@ -1,6 +1,11 @@
 (defun add-paths (&rest paths)
   (mapcar (lambda (x) (add-to-list 'load-path x)) paths))
 
+;; Work around libgccjit computing a bogus macOS version
+(when (eq system-type 'darwin)
+  (setenv "MACOSX_DEPLOYMENT_TARGET"
+          (or (getenv "MACOSX_DEPLOYMENT_TARGET")
+              (string-trim (shell-command-to-string "sw_vers -productVersion")))))
 
 (setq ring-bell-function 'ignore
       confirm-kill-emacs 'y-or-n-p
@@ -114,8 +119,10 @@
 
 
 (package-require 'ido)
-(require 'ido)
-(ido-mode 'both)
+
+(use-package ido-completing-read+
+  :ensure t
+  :init (ido-ubiquitous-mode 1))
 
 (require 'uniquify)
 (setq
@@ -149,13 +156,12 @@
  '(load-home-init-file t t)
  '(org-src-fontify-natively t)
  '(package-selected-packages
-   '(bash-completion clojure-mode color-theme csharp-mode dockerfile-mode eglot
-		     emmet-mode evil evil-collection evil-magit f fiplr
-		     fish-mode framemove go-mode hcl-mode highlight inf-mongo
-		     js2-mode magit markdown-mode ob-go org-cliplink projectile
-		     rainbow-delimiters rjsx-mode rust-mode s scala-mode slime
-		     smex tree-sitter tree-sitter-langs turkish typescript-mode
-		     use-package vtrem yaml-mode zenburn-theme))
+   '(bash-completion clojure-mode color-theme csharp-mode dockerfile-mode eglot emmet-mode evil
+		     evil-collection evil-magit f fiplr fish-mode framemove go-mode hcl-mode
+		     highlight ido-completing-read+ inf-mongo ivy js2-mode magit markdown-mode ob-go
+		     org-cliplink projectile rainbow-delimiters rjsx-mode rust-mode s scala-mode
+		     slime smex tree-sitter tree-sitter-langs turkish typescript-mode use-package
+		     vtrem yaml-mode zenburn-theme))
  '(warning-suppress-log-types '((comp))))
 
 (custom-set-faces
@@ -306,8 +312,7 @@
 
 (use-package projectile
   :ensure t
-  :init
-  (projectile-mode +1)
+  :init (projectile-mode +1)
   :bind (:map projectile-mode-map
               ("s-p" . projectile-command-map)
               ("C-c p" . projectile-command-map)))
