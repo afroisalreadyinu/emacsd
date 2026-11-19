@@ -32,9 +32,15 @@
   (lambda () (run-at-time 3 nil
     (lambda () (delete-windows-on "*Completions*")))))
 
-(when (eq system-type 'darwin)
-  (setenv "PATH" (concat "/opt/local/bin:/opt/local/sbin:/usr/local/git/bin:/usr/local/bin:" (getenv "PATH")))
-  (setq exec-path (append '("/opt/local/bin" "/opt/local/sbin" "/usr/local/bin") exec-path)))
+;; (when (eq system-type 'darwin)
+;;  (setenv "PATH" (concat "/opt/local/bin:/opt/local/sbin:/usr/local/git/bin:/usr/local/bin:" (getenv "PATH")))
+;;  (setq exec-path (append '("/opt/local/bin" "/opt/local/sbin" "/usr/local/bin") exec-path)))
+
+(use-package exec-path-from-shell
+  :ensure t
+  :if (eq system-type 'darwin)
+  :config
+  (exec-path-from-shell-initialize))
 
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key (kbd "s-!") 'shell-command)
@@ -157,11 +163,11 @@
  '(org-src-fontify-natively t)
  '(package-selected-packages
    '(bash-completion clojure-mode color-theme csharp-mode dockerfile-mode eglot emmet-mode evil
-		     evil-collection evil-magit f fiplr fish-mode framemove go-mode hcl-mode
-		     highlight ido-completing-read+ inf-mongo ivy js2-mode magit markdown-mode ob-go
-		     org-cliplink projectile rainbow-delimiters rjsx-mode rust-mode s scala-mode
-		     slime smex tree-sitter tree-sitter-langs turkish typescript-mode use-package
-		     vtrem yaml-mode zenburn-theme))
+		     evil-collection evil-magit exec-path-from-shell f fiplr fish-mode framemove
+		     go-mode hcl-mode highlight ido-completing-read+ inf-mongo ivy js2-mode lsp-mode
+		     lsp-ui magit markdown-mode ob-go org-cliplink projectile rainbow-delimiters
+		     rjsx-mode rust-mode s scala-mode slime smex tree-sitter tree-sitter-langs
+		     turkish typescript-mode use-package vtrem yaml-mode zenburn-theme))
  '(warning-suppress-log-types '((comp))))
 
 (custom-set-faces
@@ -226,6 +232,7 @@
   (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
 
   :bind (:map evil-normal-state-map
+	      ("g b" . xref-go-back)
 	      ("[tab]" . indent-for-tab-command)
 	      ("C-r" . isearch-backward)))
 
@@ -240,7 +247,6 @@
 (setq explicit-shell-file-name "bash")
 (setq sentence-end-double-space nil)
 
-(use-package inf-mongo :ensure t)
 (use-package csharp-mode :ensure t)
 (use-package markdown-mode :ensure t)
 
@@ -303,6 +309,20 @@
 ;;   :init (setq lsp-keymap-prefix "C-c C-l")
 ;;   :config (add-hook 'go-mode-hook #'lsp-deferred)
 ;;   (add-hook 'typescript-mode-hook #'lsp-deferred))
+
+(use-package lsp-mode
+  :ensure t
+  :init
+  (setq lsp-keymap-prefix "C-c s")
+  :hook ((js-mode          . lsp-deferred)
+         (js-ts-mode       . lsp-deferred)
+         (typescript-mode . lsp-deferred)
+         (typescript-ts-mode . lsp-deferred)
+         (tsx-ts-mode      . lsp-deferred)
+         (lsp-mode         . lsp-enable-which-key-integration))
+  :commands (lsp lsp-deferred))
+
+(use-package lsp-ui :ensure t :commands lsp-ui-mode)
 
 (use-package typescript-mode :ensure t)
 

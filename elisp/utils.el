@@ -38,7 +38,6 @@ fi "
 		  (f-delete profile-file-path))
       (shell (concat "*" name "*")))))
 
-(global-set-key (kbd "C-c s") 'new-shell)
 (global-set-key (kbd "C-c 2") 'insert-pdb)
 (global-set-key (kbd "C-c 3") 'insert-ipdb)
 
